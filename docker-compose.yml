@@ -1,0 +1,15 @@
+version: "3"
+services:
+  sample-app:
+    image: preetishhs/first-app
+    ports:
+      - 8080:8080
+  profile-app:
+    image: preetishhs/profile-info
+    ports:
+      - 5000:5000
+    links:
+      - sample-app
+    environment:
+      profile_url: http://sample-app:8080/data
+
