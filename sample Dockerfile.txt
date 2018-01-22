@@ -1,0 +1,21 @@
+FROM Ubuntu:14.0.4
+
+#Create working directory
+WORKDIR /src
+
+#Install dependencies
+RUN sudo apt-get update
+RUN sudo apt-get install nodejs
+RUN sudo apt-get install build-essentials
+
+COPY package.json
+RUN npm install
+
+#Bundle App source
+COPY . /src
+
+#Expose ports
+EXPOSE 8080
+
+CMD ["node", "app.js"]
+

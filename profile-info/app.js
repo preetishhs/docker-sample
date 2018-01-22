@@ -18,12 +18,14 @@ app.get('/', function(req, res, next) {
 	res.status(200).send('Welcome to your profile');
 });
 
+var URL = process.env.profile_url || 'http://localhost:8080'; 
+
 app.get('/profile', function(req, res, next) {
-	unirest.get(process.env.profile_url)
+	unirest.get(url)
 	.end(function (response) {
 		if(response) {
 			res.type('json');
-			res.status(200).send(response);
+			res.status(200).send(response.body);
 		} else {
 			res.status(404).send('Profile not found');
 		}
